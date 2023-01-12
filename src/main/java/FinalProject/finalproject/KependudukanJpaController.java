@@ -26,6 +26,7 @@ public class KependudukanJpaController implements Serializable {
         this.emf = emf;
     }
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Persistence.createEntityManagerFactory");
+    
     public KependudukanJpaController (){}
 
     public EntityManager getEntityManager() {
