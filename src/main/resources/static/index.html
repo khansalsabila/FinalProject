@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>Final Project</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    </head>
+    <body>
+        <div>Data Test Sender</div>
+        <hr>
+        <script>
+			const url = "http://localhost:8081/POST";
+			function post(){
+				let newID = document.getElementById("myid").value;
+				let name = document.getElementById("nama").value;
+                                let nin = document.getElementById("NIN").value;
+				let address = document.getElementById("address").value;
+				let dataText = {"id":newID,"nama":name,"NIN":nin,"address":address};
+				let dataJson = JSON.stringify(dataText);
+				$.ajax({
+					url: url,
+					method: 'POST',
+					data: dataJson,
+					contentType: 'application/json',
+					dataType: 'text',
+					success: function(result){
+						console.log(result);
+					}
+				});
+			}
+			
+			function put(){
+				const urlp = "http://localhost:8081/PUT";
+				let editID = document.getElementById("myid").value;
+				let name = document.getElementById("nama").value;
+                                let nin = document.getElementById("NIN").value;
+				let address = document.getElementById("address").value;
+				let dataText = {"id":editID,"nama":name,"NIN":nin,"address":address};
+				let dataJson = JSON.stringify(dataText);
+				$.ajax({
+					url: urlp,
+					method: 'PUT',
+					data: dataJson,
+					contentType: 'application/json',
+					dataType: 'text',
+					success: function(result){
+						document.getElementById("viewer").innerHTML = result;
+
+					}
+				});
+			}
+			
+			function get(){
+				const urlg = "http://localhost:8081/GET";
+				$.ajax({
+					url: urlg,
+					method: 'GET',
+					dataType: 'text',
+					success: function(result){
+						document.getElementById("viewer").innerHTML = result;
+					}
+				});
+			}
+			
+			function delNIM(){
+				const urlg = "http://localhost:8081/DELETE";
+				let editID = document.getElementById("myid").value;
+				let name = document.getElementById("nama").value;
+                                let nin = document.getElementById("NIN").value;
+				let address = document.getElementById("address").value;
+				let dataText = {"id":editID,"nama":name,"NIN":nin,"address":address};
+				let dataJson = JSON.stringify(dataText);
+				$.ajax({
+					url: urlg,
+					method: 'DELETE',
+					data: dataJson,
+					contentType: 'application/json',
+					dataType: 'text',
+					success: function(result){
+						document.getElementById("viewer").innerHTML = result;
+					}
+				});
+			}
+			
+		</script>
+		<input type="text" id="myid" name="myid">
+		<input type="text" id="nama" name="nama">
+		<input type="text" id="NIN" name="NIN">
+                <input type="text" id="address" name="address">
+
+		<hr>
+		<button onclick="get()">Get The Data from Web Server</button><br>
+		<button onclick="post()">Send The Data to Web Server</button><br>
+		<button onclick="put()">Edit The Data of Web Server</button><br>
+		<button onclick="delNIM()">Delete The Data of Web Server</button>
+		<hr>
+		<div id="viewer"></div>
+    </body>
+</html>
